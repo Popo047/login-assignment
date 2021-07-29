@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
-import { Redirect } from "react-router";
+import { useHistory } from "react-router";
 
 function SignUp() {
+  const history = useHistory();
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -33,7 +34,7 @@ function SignUp() {
           console.log(data);
         }
       })
-      .then(() => <Redirect to="/profile" />);
+      .then(() => history.replace("/profile"));
   };
 
   return (

@@ -28,6 +28,7 @@ function SignIn() {
     )
       .then(async (response) => {
         if (response.ok) {
+          console.log("Signed In");
           return response.json();
         } else {
           const data = await response.json();
@@ -35,7 +36,7 @@ function SignIn() {
         }
       })
       .then((data) => {
-        history.replace("/");
+        history.replace("/profile");
 
         console.log(data);
       });
