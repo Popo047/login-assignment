@@ -17,9 +17,10 @@ function SignIn() {
 
   const submitHandler = (event) => {
     event.preventDefault();
-
     const enteredEmail = emailRef.current.value;
     const enteredPassword = passwordRef.current.value;
+
+    console.log(enteredEmail, enteredPassword);
 
     fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDsYtRlUMzCYpLW0tlgLrsNwjcLoD5pUIQ",
@@ -38,6 +39,7 @@ function SignIn() {
       .then(async (response) => {
         if (response.ok) {
           console.log("Signed In");
+          history.replace("/profile");
           return response.json();
         } else {
           const data = await response.json();
@@ -45,8 +47,6 @@ function SignIn() {
         }
       })
       .then((data) => {
-        history.replace("/profile");
-
         console.log(data);
       });
   };
@@ -54,7 +54,7 @@ function SignIn() {
   return (
     <>
       <Typography variant="h3" color="primary">
-        Sign In{" "}
+        Sign In
       </Typography>
       <Card>
         <form action="" onSubmit={submitHandler}>
@@ -62,7 +62,7 @@ function SignIn() {
             <InputLabel htmlFor="">Enter your email </InputLabel>
             <Input
               type="email"
-              ref={emailRef}
+              inputRef={emailRef}
               aria-describedby="my-helper-text"
             />
             <FormHelperText id="my-helper-text">
@@ -74,7 +74,7 @@ function SignIn() {
             <InputLabel htmlFor="">Enter Password</InputLabel>
             <Input
               type="password"
-              ref={passwordRef}
+              inputRef={passwordRef}
               aria-describedby="my-helper-text"
             />
             <FormHelperText id="my-helper-text">
