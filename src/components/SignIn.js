@@ -1,5 +1,14 @@
 import React, { useRef } from "react";
 import { useHistory } from "react-router";
+import Button from "@material-ui/core/Button";
+import {
+  FormControl,
+  InputLabel,
+  Input,
+  FormHelperText,
+  Typography,
+} from "@material-ui/core";
+import Card from "../UI/Card";
 
 function SignIn() {
   const emailRef = useRef();
@@ -44,13 +53,40 @@ function SignIn() {
 
   return (
     <>
-      <form action="" onSubmit={submitHandler}>
-        <label htmlFor="">Enter your email </label>
-        <input type="email" ref={emailRef} />
-        <label htmlFor="">Enter Password</label>
-        <input type="password" ref={passwordRef} />
-        <button type="submit">Sign In</button>
-      </form>
+      <Typography variant="h3" color="primary">
+        Sign In{" "}
+      </Typography>
+      <Card>
+        <form action="" onSubmit={submitHandler}>
+          <FormControl>
+            <InputLabel htmlFor="">Enter your email </InputLabel>
+            <Input
+              type="email"
+              ref={emailRef}
+              aria-describedby="my-helper-text"
+            />
+            <FormHelperText id="my-helper-text">
+              We'll never share your email.
+            </FormHelperText>
+          </FormControl>
+          <br />
+          <FormControl>
+            <InputLabel htmlFor="">Enter Password</InputLabel>
+            <Input
+              type="password"
+              ref={passwordRef}
+              aria-describedby="my-helper-text"
+            />
+            <FormHelperText id="my-helper-text">
+              Password is required.
+            </FormHelperText>
+          </FormControl>
+          <br />
+          <Button type="submit" variant="contained" color="primary">
+            Sign In
+          </Button>
+        </form>
+      </Card>
     </>
   );
 }
