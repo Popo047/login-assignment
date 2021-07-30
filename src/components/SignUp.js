@@ -2,10 +2,22 @@ import React, { useRef } from "react";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store/auth-slice";
+import Card from "../UI/SimpleCard";
+import {
+  FormControl,
+  InputLabel,
+  Input,
+  FormHelperText,
+  Typography,
+  Button,
+} from "@material-ui/core";
 
 function SignUp() {
   const history = useHistory();
   const emailRef = useRef();
+  const nameRef = useRef();
+  const addressRef = useRef();
+  const phoneRef = useRef();
   const passwordRef = useRef();
   const dispatch = useDispatch();
 
@@ -14,6 +26,9 @@ function SignUp() {
 
     const enteredEmail = emailRef.current.value;
     const enteredPassword = passwordRef.current.value;
+    const enteredName = nameRef.current.value;
+    const enteredAddress = addressRef.current.value;
+    const enteredPhone = phoneRef.current.value;
 
     await fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDsYtRlUMzCYpLW0tlgLrsNwjcLoD5pUIQ",
@@ -33,6 +48,15 @@ function SignUp() {
         if (response.ok) {
           console.log("Signed Up");
           dispatch(authActions.login());
+          dispatch(
+            authActions.userDeets({
+              name: enteredName,
+              address: enteredAddress,
+              phone: enteredPhone,
+              email: enteredEmail,
+              password: enteredPassword,
+            })
+          );
         } else {
           const data = await response.json();
           console.log(data);
@@ -42,13 +66,57 @@ function SignUp() {
   };
 
   return (
-    <form action="" onSubmit={submitHandler}>
-      <label htmlFor="">Enter your email </label>
-      <input type="email" ref={emailRef} />
-      <label htmlFor="">Enter Password</label>
-      <input type="password" ref={passwordRef} />
-      <button type="submit">Sign Up</button>
-    </form>
+    <>
+      <Typography variant="h3" color="primary">
+        Sign Up
+      </Typography>
+      <Card>
+        <form action="" onSubmit={submitHandler}>
+          <FormControl>
+            <InputLabel htmlFor="">Enter your email </InputLabel>
+            <Input
+              type="email"
+              inputRef={emailRef}
+              aria-describedby="my-helper-text"
+            />
+            <FormHelperText id="my-helper-text">
+              We'll never share your email.
+            </FormHelperText>
+          </FormControl>
+          <br />
+          <FormControl>
+            <InputLabel htmlFor="">Enter Password</InputLabel>
+            <Input
+              type="password"
+              inputRef={passwordRef}
+              aria-describedby="my-helper-text"
+            />
+            <FormHelperText id="my-helper-text">
+              Password must contain 8 letters
+            </FormHelperText>
+          </FormControl>
+          <br />
+          <FormControl>
+            <InputLabel htmlFor="">Enter Name</InputLabel>
+            <Input type="text" inputRef={nameRef} />
+          </FormControl>
+          <br />
+          <FormControl>
+            <InputLabel htmlFor="">Enter Address</InputLabel>
+            <Input type="text" inputRef={addressRef} />
+          </FormControl>
+          <br />
+          <FormControl>
+            <InputLabel htmlFor="">Enter Phone Number</InputLabel>
+            <Input type="text" inputRef={phoneRef} />
+          </FormControl>
+          <br />
+          <Button type="submit" variant="contained" color="primary">
+            Sign Up
+          </Button>
+        </form>
+      </Card>
+    </>
   );
 }
 
