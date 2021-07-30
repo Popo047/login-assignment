@@ -1,4 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+// export const postNewUserData = createAsyncThunk('auth/postNewUserData', async() => {
+//   const response = await fetch('https://food-redux.firebaseio.com/message_list.json')
+// })
 
 const initialState = {
   isAuth: false,

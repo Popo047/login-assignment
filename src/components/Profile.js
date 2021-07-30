@@ -24,9 +24,9 @@ function Profile() {
         <CardMedia
           component="img"
           alt="Contemplative Reptile"
-          height="140"
+          height="170"
           image="/static/profile.jpg"
-          title="Contemplative Reptile"
+          title="profile"
         />
         <Typography gutterBottom variant="h5" component="h2">
           {userDeets.name}

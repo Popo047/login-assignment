@@ -29,6 +29,13 @@ function SignUp() {
     const enteredName = nameRef.current.value;
     const enteredAddress = addressRef.current.value;
     const enteredPhone = phoneRef.current.value;
+    const deets = {
+      name: enteredName,
+      address: enteredAddress,
+      phone: enteredPhone,
+      email: enteredEmail,
+      password: enteredPassword,
+    };
 
     await fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDsYtRlUMzCYpLW0tlgLrsNwjcLoD5pUIQ",
@@ -48,15 +55,7 @@ function SignUp() {
         if (response.ok) {
           console.log("Signed Up");
           dispatch(authActions.login());
-          dispatch(
-            authActions.userDeets({
-              name: enteredName,
-              address: enteredAddress,
-              phone: enteredPhone,
-              email: enteredEmail,
-              password: enteredPassword,
-            })
-          );
+          dispatch(authActions.userDeets(deets));
         } else {
           const data = await response.json();
           console.log(data);
