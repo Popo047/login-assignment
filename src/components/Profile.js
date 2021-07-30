@@ -8,6 +8,8 @@ import { useHistory } from "react-router";
 function Profile() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const userDeets = useSelector((state) => state.auth.userDetails);
+  console.log(userDeets);
   // const isLoggedIn = useSelector((state) => state.auth.isAuth);
 
   const clickHandler = () => {
@@ -27,10 +29,16 @@ function Profile() {
           title="Contemplative Reptile"
         />
         <Typography gutterBottom variant="h5" component="h2">
-          Popo
+          {userDeets.name}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          Learning NodeJS
+          {userDeets.address}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {userDeets.phone}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {userDeets.email}
         </Typography>
         <Button variant="contained" color="primary" onClick={clickHandler}>
           Sign Out
