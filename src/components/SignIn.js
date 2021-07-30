@@ -1,16 +1,19 @@
 import React, { useRef } from "react";
 import { useHistory } from "react-router";
-import Button from "@material-ui/core/Button";
+import { authActions } from "../store/auth-slice";
+import { useDispatch } from "react-redux";
 import {
   FormControl,
   InputLabel,
   Input,
   FormHelperText,
   Typography,
+  Button,
 } from "@material-ui/core";
-import Card from "../UI/Card";
+import Card from "../UI/SimpleCard";
 
 function SignIn() {
+  const dispatch = useDispatch();
   const emailRef = useRef();
   const passwordRef = useRef();
   const history = useHistory();
@@ -39,6 +42,7 @@ function SignIn() {
       .then(async (response) => {
         if (response.ok) {
           console.log("Signed In");
+          dispatch(authActions.login());
           history.replace("/profile");
           return response.json();
         } else {

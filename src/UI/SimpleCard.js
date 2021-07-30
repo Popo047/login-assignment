@@ -4,7 +4,7 @@ import Card from "@material-ui/core/Card";
 const useStyles = makeStyles({
   root: {
     minWidth: "450px",
-    // maxWidth: "900px",
+    maxWidth: "500px",
     display: "inline-block",
     marginTop: 50,
     fontSize: 60,

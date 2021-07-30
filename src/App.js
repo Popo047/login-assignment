@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import SignUpPage from "./pages/SignUpPage";
-import Profile from "./components/Profile";
+import Profile from "./pages/ProfilePage";
 import SignInPage from "./pages/SignInPage";
 
 function App() {

@@ -1,10 +1,13 @@
 import React, { useRef } from "react";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { authActions } from "../store/auth-slice";
 
 function SignUp() {
   const history = useHistory();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const dispatch = useDispatch();
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -29,6 +32,7 @@ function SignUp() {
       .then(async (response) => {
         if (response.ok) {
           console.log("Signed Up");
+          dispatch(authActions.login());
         } else {
           const data = await response.json();
           console.log(data);
