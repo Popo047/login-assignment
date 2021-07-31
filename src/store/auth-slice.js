@@ -1,8 +1,21 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// export const postNewUserData = createAsyncThunk('auth/postNewUserData', async() => {
-//   const response = await fetch('https://food-redux.firebaseio.com/message_list.json')
-// })
+export const postNewUserData = createAsyncThunk(
+  "auth/postNewUserData",
+  async (enteredData) => {
+    const response = await fetch(
+      "https://food-redux-default-rtdb.firebaseio.com/users.json",
+      {
+        method: "PUT",
+        body: JSON.stringify(enteredData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(response);
+  }
+);
 
 const initialState = {
   isAuth: false,
@@ -13,6 +26,7 @@ const initialState = {
     email: "",
     password: "",
   },
+  userInFB: false,
 };
 
 const authSlice = createSlice({
@@ -27,6 +41,14 @@ const authSlice = createSlice({
     },
     userDeets(state, action) {
       state.userDetails = action.payload;
+    },
+  },
+  extraReducers: {
+    [postNewUserData.fulfilled]: (state) => {
+      state.userInFB = true;
+    },
+    [postNewUserData.rejected]: (state) => {
+      state.userInFB = false;
     },
   },
 });

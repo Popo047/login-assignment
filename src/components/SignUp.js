@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
-import { authActions } from "../store/auth-slice";
+import { authActions, postNewUserData } from "../store/auth-slice";
 import Card from "../UI/SimpleCard";
 import {
   FormControl,
@@ -56,6 +56,7 @@ function SignUp() {
           console.log("Signed Up");
           dispatch(authActions.login());
           dispatch(authActions.userDeets(deets));
+          dispatch(postNewUserData(deets));
         } else {
           const data = await response.json();
           console.log(data);
