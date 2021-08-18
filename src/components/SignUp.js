@@ -38,7 +38,7 @@ function SignUp() {
     };
 
     await fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDsYtRlUMzCYpLW0tlgLrsNwjcLoD5pUIQ",
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[keyIsHidden]",
       {
         method: "POST",
         body: JSON.stringify({
